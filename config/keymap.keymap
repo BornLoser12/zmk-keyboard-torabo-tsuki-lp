@@ -27,7 +27,7 @@
             slot = <0>;
             bindings = <&bt BT_CLR>;
             key-positions = <32 33>;
-            layers = <2>;
+            layers = <3>;
             display-name = "Clear BLE Profile";
         };
     };
