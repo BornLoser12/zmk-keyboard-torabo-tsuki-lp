@@ -8,6 +8,12 @@
 #define TSUKI_TRANS_12 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
 #define TSUKI_TRANS_14 TSUKI_TRANS_12 &trans &trans
 #define TSUKI_TRANS_LAYER TSUKI_TRANS_12 TSUKI_TRANS_12 TSUKI_TRANS_14 TSUKI_TRANS_14 TSUKI_TRANS_14
+#define TSUKI_RESERVE_LAYER(node_name, layer_name) \
+    node_name {                                      \
+        status = "disabled";                        \
+        display-name = layer_name;                   \
+        bindings = <TSUKI_TRANS_LAYER>;              \
+    };
 
 / {
     macros {
@@ -84,22 +90,33 @@
             bindings = <TSUKI_TRANS_LAYER>;
         };
 
-        reserve_layer_5 {
-            status = "disabled";
-            display-name = "Layer 5";
-            bindings = <TSUKI_TRANS_LAYER>;
-        };
-
-        reserve_layer_6 {
-            status = "disabled";
-            display-name = "Layer 6";
-            bindings = <TSUKI_TRANS_LAYER>;
-        };
-
-        reserve_layer_7 {
-            status = "disabled";
-            display-name = "Layer 7";
-            bindings = <TSUKI_TRANS_LAYER>;
-        };
+        // DYA currently enables its add button only when free slots outnumber active layers.
+        TSUKI_RESERVE_LAYER(reserve_layer_5, "Layer 5")
+        TSUKI_RESERVE_LAYER(reserve_layer_6, "Layer 6")
+        TSUKI_RESERVE_LAYER(reserve_layer_7, "Layer 7")
+        TSUKI_RESERVE_LAYER(reserve_layer_8, "Layer 8")
+        TSUKI_RESERVE_LAYER(reserve_layer_9, "Layer 9")
+        TSUKI_RESERVE_LAYER(reserve_layer_10, "Layer 10")
+        TSUKI_RESERVE_LAYER(reserve_layer_11, "Layer 11")
+        TSUKI_RESERVE_LAYER(reserve_layer_12, "Layer 12")
+        TSUKI_RESERVE_LAYER(reserve_layer_13, "Layer 13")
+        TSUKI_RESERVE_LAYER(reserve_layer_14, "Layer 14")
+        TSUKI_RESERVE_LAYER(reserve_layer_15, "Layer 15")
+        TSUKI_RESERVE_LAYER(reserve_layer_16, "Layer 16")
+        TSUKI_RESERVE_LAYER(reserve_layer_17, "Layer 17")
+        TSUKI_RESERVE_LAYER(reserve_layer_18, "Layer 18")
+        TSUKI_RESERVE_LAYER(reserve_layer_19, "Layer 19")
+        TSUKI_RESERVE_LAYER(reserve_layer_20, "Layer 20")
+        TSUKI_RESERVE_LAYER(reserve_layer_21, "Layer 21")
+        TSUKI_RESERVE_LAYER(reserve_layer_22, "Layer 22")
+        TSUKI_RESERVE_LAYER(reserve_layer_23, "Layer 23")
+        TSUKI_RESERVE_LAYER(reserve_layer_24, "Layer 24")
+        TSUKI_RESERVE_LAYER(reserve_layer_25, "Layer 25")
+        TSUKI_RESERVE_LAYER(reserve_layer_26, "Layer 26")
+        TSUKI_RESERVE_LAYER(reserve_layer_27, "Layer 27")
+        TSUKI_RESERVE_LAYER(reserve_layer_28, "Layer 28")
+        TSUKI_RESERVE_LAYER(reserve_layer_29, "Layer 29")
+        TSUKI_RESERVE_LAYER(reserve_layer_30, "Layer 30")
+        TSUKI_RESERVE_LAYER(reserve_layer_31, "Layer 31")
     };
 };
