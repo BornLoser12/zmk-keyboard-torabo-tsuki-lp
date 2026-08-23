@@ -26,7 +26,7 @@
         bt_clear {
             slot = <0>;
             bindings = <&bt BT_CLR>;
-            key-positions = <28 29>;
+            key-positions = <32 33>;
             layers = <2>;
             display-name = "Clear BLE Profile";
         };
@@ -71,11 +71,11 @@
         layer_3 {
             display-name = "System";
             bindings = <
-&studio_unlock  &trans   &trans   &trans        &trans        &trans                      &trans            &trans     &trans         &trans     &trans      &trans
+&studio_unlock  &trans   &trans   &trans        &trans        &trans                      &studio_unlock    &trans     &trans         &trans     &trans      &trans
 &trans  &kp F1   &kp F2   &kp F3        &kp F4        &kp F5                      &kp HOME          &kp PG_UP  &kp PAGE_DOWN  &kp END    &kp ESCAPE  &trans
 &trans  &kp F6   &kp F7   &kp F8        &kp F9        &kp F10     &trans  &trans  &kp LEFT          &kp DOWN   &kp UP_ARROW   &kp RIGHT  &kp TAB     &trans
 &trans  &kp F11  &kp F12  &out OUT_USB  &out OUT_BLE  &bt_nxt     &trans  &trans  &kp SINGLE_QUOTE  &kp DQT    &kp GRAVE      &kp TILDE  &kp PIPE    &trans
-&trans  &trans   &trans   &trans        &kp DELETE    &kp TAB     &trans  &trans  &trans            &trans     &trans         &trans     &trans      &trans
+&trans  &trans   &trans   &trans        &kp DELETE    &kp TAB     &trans  &trans  &trans            &out OUT_USB  &out OUT_BLE  &bt_nxt  &trans  &trans
             >;
         };
 
