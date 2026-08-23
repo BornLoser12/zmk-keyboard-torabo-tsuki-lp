@@ -3,15 +3,32 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/outputs.h>
 #include <dt-bindings/zmk/pointing.h>
+#include <behaviors/runtime_macro.dtsi>
+
+#define TSUKI_TRANS_12 &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+#define TSUKI_TRANS_14 TSUKI_TRANS_12 &trans &trans
+#define TSUKI_TRANS_LAYER TSUKI_TRANS_12 TSUKI_TRANS_12 TSUKI_TRANS_14 TSUKI_TRANS_14 TSUKI_TRANS_14
 
 / {
-    combos {
-        compatible = "zmk,combos";
+    macros {
+        bt_nxt: bt_nxt {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <50>;
+            bindings = <&out OUT_BLE &bt BT_NXT &bt BT_DISC 0 &bt BT_DISC 1 &bt BT_DISC 2 &bt BT_DISC 3>;
+            display-name = "BLE Next";
+        };
+    };
+
+    runtime_combo_defaults {
+        compatible = "cormoran,runtime-combo-defaults";
 
         bt_clear {
+            slot = <0>;
             bindings = <&bt BT_CLR>;
             key-positions = <28 29>;
             layers = <2>;
+            display-name = "Clear BLE Profile";
         };
     };
 
@@ -19,6 +36,7 @@
         compatible = "zmk,keymap";
 
         layer_0 {
+            display-name = "Base";
             bindings = <
 &kp ESC    &kp N1     &kp N2    &kp N3    &kp N4    &kp N5                                                         &kp N6       &kp N7    &kp N8     &kp N9    &kp N0                &kp BSPC
 &kp TAB    &kp Q      &kp W     &kp E     &kp R     &kp T                                                          &kp Y        &kp U     &kp I      &kp O     &kp P                 &kp BSPC
@@ -29,6 +47,7 @@
         };
 
         layer_1 {
+            display-name = "Mouse";
             bindings = <
 &trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans  &trans  &trans
 &trans  &trans  &trans  &trans     &trans     &trans                  &trans  &trans     &trans     &trans  &trans  &trans
@@ -39,6 +58,7 @@
         };
 
         layer_2 {
+            display-name = "Symbols";
             bindings = <
 &trans  &trans            &trans            &trans      &trans      &trans                      &trans          &trans         &trans            &trans             &trans         &trans
 &trans  &kp LS(NUMBER_1)  &kp LS(NUMBER_2)  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                  &kp LS(N6)      &kp LS(N7)     &kp LS(N8)        &kp LS(N9)         &kp LS(N0)     &trans
@@ -49,13 +69,38 @@
         };
 
         layer_3 {
+            display-name = "System";
             bindings = <
-&trans  &trans   &trans   &trans        &trans        &trans                      &trans            &trans     &trans         &trans     &trans      &trans
+&studio_unlock  &trans   &trans   &trans        &trans        &trans                      &trans            &trans     &trans         &trans     &trans      &trans
 &trans  &kp F1   &kp F2   &kp F3        &kp F4        &kp F5                      &kp HOME          &kp PG_UP  &kp PAGE_DOWN  &kp END    &kp ESCAPE  &trans
 &trans  &kp F6   &kp F7   &kp F8        &kp F9        &kp F10     &trans  &trans  &kp LEFT          &kp DOWN   &kp UP_ARROW   &kp RIGHT  &kp TAB     &trans
-&trans  &kp F11  &kp F12  &out OUT_USB  &out OUT_BLE  &bt BT_NXT  &trans  &trans  &kp SINGLE_QUOTE  &kp DQT    &kp GRAVE      &kp TILDE  &kp PIPE    &trans
+&trans  &kp F11  &kp F12  &out OUT_USB  &out OUT_BLE  &bt_nxt     &trans  &trans  &kp SINGLE_QUOTE  &kp DQT    &kp GRAVE      &kp TILDE  &kp PIPE    &trans
 &trans  &trans   &trans   &trans        &kp DELETE    &kp TAB     &trans  &trans  &trans            &trans     &trans         &trans     &trans      &trans
             >;
+        };
+
+        reserve_layer_4 {
+            status = "disabled";
+            display-name = "Layer 4";
+            bindings = <TSUKI_TRANS_LAYER>;
+        };
+
+        reserve_layer_5 {
+            status = "disabled";
+            display-name = "Layer 5";
+            bindings = <TSUKI_TRANS_LAYER>;
+        };
+
+        reserve_layer_6 {
+            status = "disabled";
+            display-name = "Layer 6";
+            bindings = <TSUKI_TRANS_LAYER>;
+        };
+
+        reserve_layer_7 {
+            status = "disabled";
+            display-name = "Layer 7";
+            bindings = <TSUKI_TRANS_LAYER>;
         };
     };
 };
