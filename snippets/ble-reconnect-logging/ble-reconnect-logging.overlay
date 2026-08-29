@@ -1,0 +1,5 @@
+&zephyr_udc0 {
+    ble_reconnect_uart: ble-reconnect-uart {
+        compatible = "zephyr,cdc-acm-uart";
+    };
+};

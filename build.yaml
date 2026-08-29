@@ -5,7 +5,7 @@ include:
     artifact-name: torabo_tsuki_lp_right_central
   - board: bmp_boost
     shield: torabo_tsuki_lp_right
-    snippet: "zmk-usb-logging ble-reconnect-logging split-central input-trackball input-listener"
+    snippet: "ble-reconnect-logging split-central input-trackball input-listener"
     artifact-name: torabo_tsuki_lp_right_central_ble_reconnect_log
   - board: bmp_boost
     shield: torabo_tsuki_lp_left

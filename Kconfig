@@ -1,0 +1,4 @@
+config TORABO_BLE_RECONNECT_DIAGNOSTICS
+    bool "Torabo Tsuki BLE reconnect diagnostics"
+    default n
+    depends on ZMK_BLE && ZMK_SPLIT_ROLE_CENTRAL
