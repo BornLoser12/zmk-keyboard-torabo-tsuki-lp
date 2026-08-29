@@ -92,6 +92,16 @@
         status = "disabled";
     };
 
+    right_trackball_layout: right_trackball_layout {
+        compatible = "cormoran,physical-layout-trackball";
+        display-name = "Right Trackball";
+        size = <150>;
+        x = <875>;
+        y = <425>;
+        linked-device-identifiers = "mouse", "wheel";
+        linked-subsystems = "cormoran_rip", "cormoran_rip";
+    };
+
     vbatt: vbatt {
         // Disable default battery monitoring
         status = "disabled";

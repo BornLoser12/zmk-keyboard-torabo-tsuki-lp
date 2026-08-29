@@ -39,6 +39,9 @@ manifest:
     - name: zmk-module-runtime-input-processor
       remote: cormoran
       revision: 43618985f8c9d5457cc333b7ca0733f2d361911e
+    - name: zmk-feature-module-physical-layout
+      remote: cormoran
+      revision: 4f18de45dc27820725d267916b4cdacc0e0b6cf9
     - name: zmk-feature-runtime-combo
       remote: cormoran
       revision: d9490e7b5d41c516221d131241009e81740efcee

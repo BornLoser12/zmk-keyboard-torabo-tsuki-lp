@@ -31,6 +31,13 @@
 
 / {
     behaviors {
+        amka: amka {
+            compatible = "zmk,behavior-input-processor-temp-layer-keep-active";
+            #binding-cells = <0>;
+            processor-name = "mouse";
+            display-name = "Keep Auto-Mouse Layer";
+        };
+
         mt_safe: mod_tap_safe {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;

@@ -4,15 +4,23 @@
 #include <input/processors/runtime-input-processor.dtsi>
 
 &mouse_runtime_input_processor {
-    processor-label = "pointer";
+    processor-label = "mouse";
+    scale-multiplier = <1>;
+    scale-divisor = <1>;
+    rotation-degrees = <0>;
+    active-layers = <0>;
     temp-layer-enabled;
     temp-layer = <1>;
-    temp-layer-activation-delay-ms = <100>;
+    temp-layer-activation-delay-ms = <0>;
     temp-layer-deactivation-delay-ms = <60000>;
 };
 
 &scroll_runtime_input_processor {
     processor-label = "wheel";
+    scale-multiplier = <1>;
+    scale-divisor = <60>;
+    rotation-degrees = <0>;
+    active-layers = <16>;
 };
 
 &pointing_listener {
