@@ -8,7 +8,7 @@
 
 #include <zmk/ble.h>
 
-LOG_MODULE_REGISTER(ble_reconnect_diag, CONFIG_ZMK_LOG_LEVEL);
+LOG_MODULE_REGISTER(ble_reconnect_diag, LOG_LEVEL_INF);
 
 struct bond_dump_context {
     const bt_addr_le_t *dst;
