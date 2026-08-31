@@ -1,0 +1,56 @@
+diff --git a/app/src/studio/rpc.c b/app/src/studio/rpc.c
+index 4f4d613a..ff5291c3 100644
+--- a/app/src/studio/rpc.c
++++ b/app/src/studio/rpc.c
+@@ -21,6 +21,10 @@ LOG_MODULE_REGISTER(zmk_studio, CONFIG_ZMK_STUDIO_LOG_LEVEL);
+ #include <zmk/events/endpoint_changed.h>
+ #include <zmk/studio/core.h>
+ #include <zmk/studio/rpc.h>
++#if IS_ENABLED(CONFIG_TORABO_STUDIO_USB_INDEPENDENT)
++#include <zmk/events/usb_conn_state_changed.h>
++#include <zmk/usb.h>
++#endif
+ 
+ ZMK_EVENT_IMPL(zmk_studio_rpc_notification);
+ 
+@@ -278,8 +282,18 @@ static void rpc_main(void) {
+ K_THREAD_DEFINE(studio_rpc_thread, CONFIG_ZMK_STUDIO_RPC_THREAD_STACK_SIZE, rpc_main, NULL, NULL,
+                 NULL, K_LOWEST_APPLICATION_THREAD_PRIO, 0, 0);
+ 
++static enum zmk_transport get_rpc_transport(void) {
++#if IS_ENABLED(CONFIG_TORABO_STUDIO_USB_INDEPENDENT)
++    /* Studio over USB must not change the user's HID output or BLE profile. */
++    if (zmk_usb_is_hid_ready()) {
++        return ZMK_TRANSPORT_USB;
++    }
++#endif
++    return zmk_endpoint_get_selected().transport;
++}
++
+ static void refresh_selected_transport(void) {
+-    enum zmk_transport transport = zmk_endpoint_get_selected().transport;
++    enum zmk_transport transport = get_rpc_transport();
+ 
+     k_mutex_lock(&rpc_transport_mutex, K_FOREVER);
+ 
+@@ -350,6 +364,13 @@ static int zmk_rpc_init(void) {
+ SYS_INIT(zmk_rpc_init, APPLICATION, CONFIG_APPLICATION_INIT_PRIORITY);
+ 
+ static int studio_rpc_listener_cb(const zmk_event_t *eh) {
++#if IS_ENABLED(CONFIG_TORABO_STUDIO_USB_INDEPENDENT)
++    /* USB can change while the selected HID endpoint remains BLE. */
++    if (as_zmk_usb_conn_state_changed(eh)) {
++        refresh_selected_transport();
++        return ZMK_EV_EVENT_BUBBLE;
++    }
++#endif
+     struct zmk_endpoint_changed *ep_changed = as_zmk_endpoint_changed(eh);
+     if (ep_changed) {
+         refresh_selected_transport();
+@@ -381,3 +402,6 @@ static int studio_rpc_listener_cb(const zmk_event_t *eh) {
+ ZMK_LISTENER(studio_rpc, studio_rpc_listener_cb);
+ ZMK_SUBSCRIPTION(studio_rpc, zmk_endpoint_changed);
+ ZMK_SUBSCRIPTION(studio_rpc, zmk_studio_rpc_notification);
++#if IS_ENABLED(CONFIG_TORABO_STUDIO_USB_INDEPENDENT)
++ZMK_SUBSCRIPTION(studio_rpc, zmk_usb_conn_state_changed);
++#endif

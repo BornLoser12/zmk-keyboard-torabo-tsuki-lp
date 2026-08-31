@@ -2,3 +2,13 @@ config TORABO_BLE_RECONNECT_DIAGNOSTICS
     bool "Torabo Tsuki BLE reconnect diagnostics"
     default n
     depends on ZMK_BLE && ZMK_SPLIT_ROLE_CENTRAL
+
+config TORABO_STUDIO_USB_INDEPENDENT
+    bool "Use USB Studio independently of the HID output"
+    default y
+    depends on ZMK_STUDIO_TRANSPORT_UART && ZMK_USB && ZMK_SPLIT_ROLE_CENTRAL
+    depends on SHIELD_TORABO_TSUKI_LP_LEFT || SHIELD_TORABO_TSUKI_LP_RIGHT
+    help
+      Prefer the Studio USB transport whenever the USB host is configured,
+      without changing the selected keyboard output or Bluetooth profile.
+      Fall back to the normal Studio transport selection when USB disconnects.

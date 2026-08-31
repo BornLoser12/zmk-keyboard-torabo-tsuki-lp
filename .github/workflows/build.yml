@@ -2,5 +2,18 @@ name: Build ZMK firmware
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
+  verify-studio-usb:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
+        with:
+          repository: cormoran/zmk
+          ref: e5c9b6915b56801193e359dd9bad4a167ce0d1b8
+          path: .zmk-test
+          persist-credentials: false
+      - name: Verify Studio USB transport
+        run: python3 tests/test_studio_usb.py --zmk .zmk-test --require-toolchain
   build:
+    needs: verify-studio-usb
     uses: cormoran/zmk/.github/workflows/build-user-config.yml@e5c9b6915b56801193e359dd9bad4a167ce0d1b8
